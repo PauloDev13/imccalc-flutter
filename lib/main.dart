@@ -8,6 +8,19 @@ class CalculadoraIMC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.teal,
+          brightness: Brightness.dark,
+        ),
+        useMaterial3: true,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.teal,
+          foregroundColor: Colors.white,
+          centerTitle: true,
+          elevation: 2,
+        ),
+      ),
       home: TelaPrincipal(),
     );
   }
