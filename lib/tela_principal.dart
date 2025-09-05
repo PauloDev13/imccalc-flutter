@@ -23,28 +23,31 @@ class TelaPrincipal extends StatefulWidget {
 }
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
-  Color corCartaoMasculinoPadrao = corInativaCartao;
-  Color corCartaoFemininoPadrao = corInativaCartao;
+  // Variável do tipo opcional (pode ser nula)
+  Genero? sexoSelecionado;
 
-  void atualizaCorCartao(Genero sexo) {
-    if (sexo == Genero.masculino) {
-      if (corCartaoMasculinoPadrao == corInativaCartao) {
-        corCartaoMasculinoPadrao = corAtivaCartao;
-        corCartaoFemininoPadrao = corInativaCartao;
-      } else {
-        corCartaoMasculinoPadrao = corInativaCartao;
-      }
-    }
-
-    if (sexo == Genero.feminino) {
-      if (corCartaoFemininoPadrao == corInativaCartao) {
-        corCartaoFemininoPadrao = corAtivaCartao;
-        corCartaoMasculinoPadrao = corInativaCartao;
-      } else {
-        corCartaoFemininoPadrao = corInativaCartao;
-      }
-    }
-  }
+  // Color corCartaoMasculinoPadrao = corInativaCartao;
+  // Color corCartaoFemininoPadrao = corInativaCartao;
+  //
+  // void atualizaCorCartao(Genero sexo) {
+  //   if (sexo == Genero.masculino) {
+  //     if (corCartaoMasculinoPadrao == corInativaCartao) {
+  //       corCartaoMasculinoPadrao = corAtivaCartao;
+  //       corCartaoFemininoPadrao = corInativaCartao;
+  //     } else {
+  //       corCartaoMasculinoPadrao = corInativaCartao;
+  //     }
+  //   }
+  //
+  //   if (sexo == Genero.feminino) {
+  //     if (corCartaoFemininoPadrao == corInativaCartao) {
+  //       corCartaoFemininoPadrao = corAtivaCartao;
+  //       corCartaoMasculinoPadrao = corInativaCartao;
+  //     } else {
+  //       corCartaoFemininoPadrao = corInativaCartao;
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +64,13 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                   child: GestureDetector(
                     onTap: (){
                       setState(() {
-                        atualizaCorCartao(Genero.masculino);
+                        sexoSelecionado = Genero.masculino;
                       });
                     },
                     child: CartaoPadrao(
-                      cor: corCartaoMasculinoPadrao,
+                      cor: sexoSelecionado == Genero.masculino
+                        ? corAtivaCartao
+                        : corInativaCartao,
                       filhosCartao: ConteudoIcone(
                         icone: FontAwesomeIcons.mars,
                         descricao: 'MASCULINO',
@@ -77,11 +82,13 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        atualizaCorCartao(Genero.feminino);
+                        sexoSelecionado = Genero.feminino;
                       });
                     },
                     child: CartaoPadrao(
-                      cor: corCartaoFemininoPadrao,
+                      cor: sexoSelecionado == Genero.feminino
+                      ? corAtivaCartao
+                      : corInativaCartao,
                       filhosCartao: ConteudoIcone(
                         icone: FontAwesomeIcons.venus,
                         descricao: 'FEMINIMO',
