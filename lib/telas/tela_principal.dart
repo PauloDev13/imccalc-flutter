@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Imports locais
-import 'cartao_padrao.dart';
-import 'conteudo_icone.dart';
-import 'constantes.dart';
-import 'botao_inferior.dart';
-import 'botao_arredondado.dart';
+import '../constantes.dart';
+import '../calculadora_imc.dart';
+import '../telas/tela_resultados.dart';
+import '../componentes/cartao_padrao.dart';
+import '../componentes/conteudo_icone.dart';
+import '../componentes/botao_inferior.dart';
+import '../componentes/botao_arredondado.dart';
 
 enum Genero {
   masculino,
@@ -202,8 +204,19 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           BotaoInferior(
             rotulo: 'CALCULAR',
             aoPressionar: () {
-              Navigator.pushNamed(
-                  context, '/resultados',
+              CalculadoraIMC calc = CalculadoraIMC(
+                  altura: altura,
+                  peso: peso
+              );
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TelaResultados(
+                          resultadoIMC: calc.calcularIMC(),
+                          resultadoTexto: calc.obterResultado(),
+                          interpretacao: calc.obterInterpretacao(),
+                      ),
+                  ),
               );
             },
           )
