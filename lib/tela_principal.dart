@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'cartao_padrao.dart';
 import 'conteudo_icone.dart';
 import 'constantes.dart';
+import 'tela_resultados.dart';
 
 enum Genero {
   masculino,
@@ -223,11 +224,28 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
               ],
             ),
           ),
-          Container(
-            color: kCorContainerInferior,
-            margin: EdgeInsets.only(top: 5.0),
-            width: double.infinity,
-            height: kAlturaContainerInferior,
+          GestureDetector(
+            onTap: () {
+              // Navigator.pushNamed(context, '/resultados');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TelaResultados(),
+                ),
+              );
+            },
+            child: Container(
+              color: kCorContainerInferior,
+              margin: EdgeInsets.only(top: 5.0),
+              padding: EdgeInsets.only(bottom: 30.0),
+              width: double.infinity,
+              height: kAlturaContainerInferior,
+              child: Center(
+                child: Text(
+                  'CALCULAR',
+                  style: kBotaoGrandeTextStyle,
+                ),
+              ),
+            ),
           )
         ],
       )

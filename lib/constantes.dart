@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-const kAlturaContainerInferior = 80.0;
+const kAlturaContainerInferior = 90.0;
 const kCorContainerInferior = Color(0xFFff5822);
 const kCorAtivaCartao = Color(0xFF9e9e9e);
 const kCorInativaCartao = Color(0xFF7e7e7e);
@@ -15,4 +15,9 @@ const kDescricaoTextStyle = TextStyle(
 const kNumerosTextStyle = TextStyle(
     fontSize: 50.0,
     fontWeight: FontWeight.w900,
+);
+
+const kBotaoGrandeTextStyle = TextStyle(
+    fontSize: 25.0,
+    fontWeight: FontWeight.bold,
 );
