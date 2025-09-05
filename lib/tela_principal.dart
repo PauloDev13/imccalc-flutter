@@ -4,11 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // Imports locais
 import 'cartao_padrao.dart';
 import 'conteudo_icone.dart';
-
-const alturaContainerInferior = 80.0;
-const corContainerInferior = Color(0xFFff5822);
-const corAtivaCartao = Color(0xFF9e9e9e);
-const corInativaCartao = Color(0xFF7e7e7e);
+import 'constantes.dart';
 
 enum Genero {
   masculino,
@@ -25,6 +21,7 @@ class TelaPrincipal extends StatefulWidget {
 class _TelaPrincipalState extends State<TelaPrincipal> {
   // Variável do tipo opcional (pode ser nula)
   Genero? sexoSelecionado;
+  int altura = 180;
 
   // Color corCartaoMasculinoPadrao = corInativaCartao;
   // Color corCartaoFemininoPadrao = corInativaCartao;
@@ -56,6 +53,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         title: Text('CALCULADORA IMC'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(child:
             Row(
@@ -68,8 +66,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       });
                     },
                     cor: sexoSelecionado == Genero.masculino
-                      ? corAtivaCartao
-                      : corInativaCartao,
+                      ? kCorAtivaCartao
+                      : kCorInativaCartao,
                     filhosCartao: ConteudoIcone(
                       icone: FontAwesomeIcons.mars,
                       descricao: 'MASCULINO',
@@ -84,8 +82,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       });
                     },
                     cor: sexoSelecionado == Genero.feminino
-                    ? corAtivaCartao
-                    : corInativaCartao,
+                    ? kCorAtivaCartao
+                    : kCorInativaCartao,
                     filhosCartao: ConteudoIcone(
                       icone: FontAwesomeIcons.venus,
                       descricao: 'FEMINIMO',
@@ -98,7 +96,43 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           Expanded(
             child: CartaoPadrao(
               aoPressionar: () {},
-              cor: corAtivaCartao,
+              cor: kCorAtivaCartao,
+              filhosCartao: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ALTURA',
+                    style: kDescricaoTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(
+                        altura.toString(),
+                        style: kNumerosTextStyle,
+                      ),
+                      Text(
+                        'cm',
+                        style: kDescricaoTextStyle,
+                      ),
+                    ],
+                  ),
+                  Slider(
+                    activeColor: Color(0xFFff5822),
+                    inactiveColor: Color(0xFF8d8e98),
+                    value: altura.toDouble(),
+                    min: 120.0,
+                    max: 220.0,
+                    onChanged: (double novoValor){
+                      setState(() {
+                        altura = novoValor.round();
+                      });
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(child:
@@ -107,23 +141,23 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                 Expanded(
                   child: CartaoPadrao(
                     aoPressionar: (){},
-                    cor: corAtivaCartao,
+                    cor: kCorAtivaCartao,
                   ),
                 ),
                 Expanded(
                   child: CartaoPadrao(
                     aoPressionar: (){},
-                    cor: corAtivaCartao,
+                    cor: kCorAtivaCartao,
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            color: corContainerInferior,
+            color: kCorContainerInferior,
             margin: EdgeInsets.only(top: 5.0),
             width: double.infinity,
-            height: alturaContainerInferior,
+            height: kAlturaContainerInferior,
           )
         ],
       )
