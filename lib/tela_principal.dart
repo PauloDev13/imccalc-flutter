@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-const ALTURA_CONTAINER_INFERIOR = 80.0;
-const COR_CONTAINER_INFERIOR = Color(0xFFff5822);
-const COR_ATIVA_CARTAO = Color(0xFF9e9e9e);
+// Imports locais
+import 'cartao_padrao.dart';
+import 'conteudo_icone.dart';
+
+const alturaContainerInferior = 80.0;
+const corContainerInferior = Color(0xFFff5822);
+const corAtivaCartao = Color(0xFF9e9e9e);
+const corInativaCartao = Color(0xFF7e7e7e);
+
+enum Genero {
+  masculino,
+  feminino,
+}
 
 class TelaPrincipal extends StatefulWidget {
   const TelaPrincipal({super.key});
@@ -13,6 +23,29 @@ class TelaPrincipal extends StatefulWidget {
 }
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
+  Color corCartaoMasculinoPadrao = corInativaCartao;
+  Color corCartaoFemininoPadrao = corInativaCartao;
+
+  void atualizaCorCartao(Genero sexo) {
+    if (sexo == Genero.masculino) {
+      if (corCartaoMasculinoPadrao == corInativaCartao) {
+        corCartaoMasculinoPadrao = corAtivaCartao;
+        corCartaoFemininoPadrao = corInativaCartao;
+      } else {
+        corCartaoMasculinoPadrao = corInativaCartao;
+      }
+    }
+
+    if (sexo == Genero.feminino) {
+      if (corCartaoFemininoPadrao == corInativaCartao) {
+        corCartaoFemininoPadrao = corAtivaCartao;
+        corCartaoMasculinoPadrao = corInativaCartao;
+      } else {
+        corCartaoFemininoPadrao = corInativaCartao;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,20 +58,34 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
             Row(
               children: [
                 Expanded(
-                  child: CartaoPadrao(
-                    cor: COR_ATIVA_CARTAO,
-                    filhosCartao: ConteudoIcone(
-                      icone: FontAwesomeIcons.mars,
-                      descricao: 'MASCULINO',
-                    )
+                  child: GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        atualizaCorCartao(Genero.masculino);
+                      });
+                    },
+                    child: CartaoPadrao(
+                      cor: corCartaoMasculinoPadrao,
+                      filhosCartao: ConteudoIcone(
+                        icone: FontAwesomeIcons.mars,
+                        descricao: 'MASCULINO',
+                      )
+                    ),
                   ),
                 ),
                 Expanded(
-                  child: CartaoPadrao(
-                    cor: COR_ATIVA_CARTAO,
-                    filhosCartao: ConteudoIcone(
-                      icone: FontAwesomeIcons.venus,
-                      descricao: 'FEMINIMO',
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        atualizaCorCartao(Genero.feminino);
+                      });
+                    },
+                    child: CartaoPadrao(
+                      cor: corCartaoFemininoPadrao,
+                      filhosCartao: ConteudoIcone(
+                        icone: FontAwesomeIcons.venus,
+                        descricao: 'FEMINIMO',
+                      ),
                     ),
                   ),
                 ),
@@ -47,7 +94,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           ),
           Expanded(
             child: CartaoPadrao(
-              cor: COR_ATIVA_CARTAO,
+              cor: corAtivaCartao,
             ),
           ),
           Expanded(child:
@@ -55,81 +102,25 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
               children: <Widget>[
                 Expanded(
                   child: CartaoPadrao(
-                    cor: COR_ATIVA_CARTAO,
+                    cor: corAtivaCartao,
                   ),
                 ),
                 Expanded(
                   child: CartaoPadrao(
-                    cor: COR_ATIVA_CARTAO,
+                    cor: corAtivaCartao,
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            color: COR_CONTAINER_INFERIOR,
+            color: corContainerInferior,
             margin: EdgeInsets.only(top: 5.0),
             width: double.infinity,
-            height: ALTURA_CONTAINER_INFERIOR,
+            height: alturaContainerInferior,
           )
         ],
       )
-    );
-  }
-}
-
-class ConteudoIcone extends StatelessWidget {
-  final IconData icone;
-  final String descricao;
-
-  const ConteudoIcone({
-    super.key,
-    required this.icone,
-    required this.descricao,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Icon(
-          icone,
-          size: 95.0,
-        ),
-        SizedBox(height: 15.0,),
-        Text(
-          descricao,
-          style: TextStyle(
-            fontSize: 20.0,
-            color: Colors.black,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class CartaoPadrao extends StatelessWidget {
-  // propriedade que será informada
-  final Color cor;
-  final Widget? filhosCartao;
-  // construtor
-  const CartaoPadrao({
-    super.key,
-    required this.cor,
-    this.filhosCartao,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(20.0),
-      decoration: BoxDecoration(
-        color: cor,
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: filhosCartao,
     );
   }
 }
