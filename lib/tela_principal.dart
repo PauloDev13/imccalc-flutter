@@ -5,7 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'cartao_padrao.dart';
 import 'conteudo_icone.dart';
 import 'constantes.dart';
-import 'tela_resultados.dart';
+import 'botao_inferior.dart';
+import 'botao_arredondado.dart';
 
 enum Genero {
   masculino,
@@ -25,29 +26,6 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
   int altura = 180;
   int peso = 60;
   int idade =20;
-
-  // Color corCartaoMasculinoPadrao = corInativaCartao;
-  // Color corCartaoFemininoPadrao = corInativaCartao;
-  //
-  // void atualizaCorCartao(Genero sexo) {
-  //   if (sexo == Genero.masculino) {
-  //     if (corCartaoMasculinoPadrao == corInativaCartao) {
-  //       corCartaoMasculinoPadrao = corAtivaCartao;
-  //       corCartaoFemininoPadrao = corInativaCartao;
-  //     } else {
-  //       corCartaoMasculinoPadrao = corInativaCartao;
-  //     }
-  //   }
-  //
-  //   if (sexo == Genero.feminino) {
-  //     if (corCartaoFemininoPadrao == corInativaCartao) {
-  //       corCartaoFemininoPadrao = corAtivaCartao;
-  //       corCartaoMasculinoPadrao = corInativaCartao;
-  //     } else {
-  //       corCartaoFemininoPadrao = corInativaCartao;
-  //     }
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +76,6 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           ),
           Expanded(
             child: CartaoPadrao(
-              aoPressionar: () {},
               cor: kCorAtivaCartao,
               filhosCartao: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -143,7 +120,6 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
               children: <Widget>[
                 Expanded(
                   child: CartaoPadrao(
-                    aoPressionar: (){},
                     cor: kCorAtivaCartao,
                     filhosCartao: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -183,7 +159,6 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                 ),
                 Expanded(
                   child: CartaoPadrao(
-                    aoPressionar: (){},
                     cor: kCorAtivaCartao,
                     filhosCartao: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -224,59 +199,16 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
               ],
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              // Navigator.pushNamed(context, '/resultados');
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TelaResultados(),
-                ),
+          BotaoInferior(
+            rotulo: 'CALCULAR',
+            aoPressionar: () {
+              Navigator.pushNamed(
+                  context, '/resultados',
               );
             },
-            child: Container(
-              color: kCorContainerInferior,
-              margin: EdgeInsets.only(top: 5.0),
-              padding: EdgeInsets.only(bottom: 30.0),
-              width: double.infinity,
-              height: kAlturaContainerInferior,
-              child: Center(
-                child: Text(
-                  'CALCULAR',
-                  style: kBotaoGrandeTextStyle,
-                ),
-              ),
-            ),
           )
         ],
       )
-    );
-  }
-}
-
-class BotaoArredondado extends StatelessWidget {
-  final IconData icone;
-  final VoidCallback aoPressionar;
-
-  const BotaoArredondado({
-    super.key,
-    required this.icone,
-    required this.aoPressionar
-
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0
-      ),
-      shape: CircleBorder(),
-      fillColor: Color(0xFF7e7e7e),
-      onPressed: aoPressionar,
-      child: Icon(
-        icone,
-      ),
     );
   }
 }

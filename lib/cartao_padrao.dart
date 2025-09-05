@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class CartaoPadrao extends StatelessWidget {
   // propriedade que será informada
   final Color cor;
-  final VoidCallback aoPressionar;
+  final VoidCallback? aoPressionar;
   final Widget? filhosCartao;
   // construtor
   const CartaoPadrao({
     super.key,
     required this.cor,
-    required this.aoPressionar,
+    this.aoPressionar,
     this.filhosCartao,
   });
 
