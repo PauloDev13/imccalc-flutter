@@ -22,6 +22,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
   // Variável do tipo opcional (pode ser nula)
   Genero? sexoSelecionado;
   int altura = 180;
+  int peso = 60;
+  int idade =20;
 
   // Color corCartaoMasculinoPadrao = corInativaCartao;
   // Color corCartaoFemininoPadrao = corInativaCartao;
@@ -125,7 +127,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     value: altura.toDouble(),
                     min: 120.0,
                     max: 220.0,
-                    onChanged: (double novoValor){
+                    onChanged: (double novoValor) {
                       setState(() {
                         altura = novoValor.round();
                       });
@@ -142,12 +144,80 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                   child: CartaoPadrao(
                     aoPressionar: (){},
                     cor: kCorAtivaCartao,
+                    filhosCartao: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'PESO',
+                          style: kDescricaoTextStyle,
+                        ),
+                        Text(
+                          peso.toString(),
+                          style: kNumerosTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            BotaoArredondado(
+                              icone: FontAwesomeIcons.plus,
+                              aoPressionar: () {
+                                setState(() {
+                                  peso++;
+                                });
+                              },
+                            ),
+                            BotaoArredondado(
+                              icone: FontAwesomeIcons.minus,
+                              aoPressionar: () {
+                                setState(() {
+                                  peso--;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
                   child: CartaoPadrao(
                     aoPressionar: (){},
                     cor: kCorAtivaCartao,
+                    filhosCartao: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'IDADE',
+                          style: kDescricaoTextStyle,
+                        ),
+                        Text(
+                          idade.toString(),
+                          style: kNumerosTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            BotaoArredondado(
+                              icone: FontAwesomeIcons.plus,
+                              aoPressionar: () {
+                                setState(() {
+                                  idade++;
+                                });
+                              },
+                            ),
+                            BotaoArredondado(
+                              icone: FontAwesomeIcons.minus,
+                              aoPressionar: () {
+                                setState(() {
+                                  idade--;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -161,6 +231,34 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           )
         ],
       )
+    );
+  }
+}
+
+class BotaoArredondado extends StatelessWidget {
+  final IconData icone;
+  final VoidCallback aoPressionar;
+
+  const BotaoArredondado({
+    super.key,
+    required this.icone,
+    required this.aoPressionar
+
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      constraints: BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0
+      ),
+      shape: CircleBorder(),
+      fillColor: Color(0xFF7e7e7e),
+      onPressed: aoPressionar,
+      child: Icon(
+        icone,
+      ),
     );
   }
 }
