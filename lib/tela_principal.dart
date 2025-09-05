@@ -61,38 +61,34 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
             Row(
               children: [
                 Expanded(
-                  child: GestureDetector(
-                    onTap: (){
+                  child: CartaoPadrao(
+                    aoPressionar: () {
                       setState(() {
                         sexoSelecionado = Genero.masculino;
                       });
                     },
-                    child: CartaoPadrao(
-                      cor: sexoSelecionado == Genero.masculino
-                        ? corAtivaCartao
-                        : corInativaCartao,
-                      filhosCartao: ConteudoIcone(
-                        icone: FontAwesomeIcons.mars,
-                        descricao: 'MASCULINO',
-                      )
-                    ),
+                    cor: sexoSelecionado == Genero.masculino
+                      ? corAtivaCartao
+                      : corInativaCartao,
+                    filhosCartao: ConteudoIcone(
+                      icone: FontAwesomeIcons.mars,
+                      descricao: 'MASCULINO',
+                    )
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: CartaoPadrao(
+                    aoPressionar: () {
                       setState(() {
                         sexoSelecionado = Genero.feminino;
                       });
                     },
-                    child: CartaoPadrao(
-                      cor: sexoSelecionado == Genero.feminino
-                      ? corAtivaCartao
-                      : corInativaCartao,
-                      filhosCartao: ConteudoIcone(
-                        icone: FontAwesomeIcons.venus,
-                        descricao: 'FEMINIMO',
-                      ),
+                    cor: sexoSelecionado == Genero.feminino
+                    ? corAtivaCartao
+                    : corInativaCartao,
+                    filhosCartao: ConteudoIcone(
+                      icone: FontAwesomeIcons.venus,
+                      descricao: 'FEMINIMO',
                     ),
                   ),
                 ),
@@ -101,6 +97,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           ),
           Expanded(
             child: CartaoPadrao(
+              aoPressionar: () {},
               cor: corAtivaCartao,
             ),
           ),
@@ -109,11 +106,13 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
               children: <Widget>[
                 Expanded(
                   child: CartaoPadrao(
+                    aoPressionar: (){},
                     cor: corAtivaCartao,
                   ),
                 ),
                 Expanded(
                   child: CartaoPadrao(
+                    aoPressionar: (){},
                     cor: corAtivaCartao,
                   ),
                 ),
