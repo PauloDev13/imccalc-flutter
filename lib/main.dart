@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-// Imports locais
-import 'telas/tela_principal.dart';
+import 'package:imccalc_flutter/telas/splash_screen.dart';
 
 void main() => runApp(CalculadoraIMC());
 
@@ -19,7 +17,8 @@ class CalculadoraIMC extends StatelessWidget {
           elevation: 2,
         ),
       ),
-      home: TelaPrincipal(),
+      home: AnimatedSplashScreenWidget(),
+      // home: TelaPrincipal(),
     );
   }
 }
